@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TODO App</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+
+  .todo-container {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .todo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .todo-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+  }
+
+  .todo-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .todo-item {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .todo-item-checkbox {
+    margin-right: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="todo-container">
+  <div class="todo-header">
+    <h2>TODO App</h2>
+    <input type="text" class="todo-input" placeholder="Add New Task">
+    <button onclick="addTodo()">Add</button>
+  </div>
+  <ul class="todo-list"></ul>
+</div>
+
+<script>
+  const todoList = document.querySelector('.todo-list');
+  const todoInput = document.querySelector('.todo-input');
+
+  function addTodo() {
+    const task = todoInput.value.trim();
+    if (task !== '') {
+      const todoItem = document.createElement('li');
+      todoItem.classList.add('todo-item');
+      todoItem.innerHTML = `
+        <input type="checkbox" class="todo-item-checkbox">
+        <span>${task}</span>
+        <button onclick="removeTodo(this)">Remove</button>
+      `;
+      todoList.appendChild(todoItem);
+      todoInput.value = '';
+    }
+  }
+
+  function removeTodo(btn) {
+    const todoItem = btn.parentElement;
+    todoList.removeChild(todoItem);
+  }
+</script>
+</body>
+</html>
